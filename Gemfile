@@ -6,3 +6,10 @@ source "https://rubygems.org"
 gemspec
 
 gem 'voluntary', path: '../voluntary'
+
+# view
+gem "will_paginate", github: 'mislav/will_paginate'
+
+group :development do
+  gem 'mysql2', '~> 0.3.13'
+end
