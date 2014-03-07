@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306191356) do
+ActiveRecord::Schema.define(version: 20140307160706) do
 
   create_table "areas", force: true do |t|
     t.string   "ancestry"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20140306191356) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "organizations", ["slug"], name: "index_organizations_on_slug", using: :btree
@@ -178,6 +179,80 @@ ActiveRecord::Schema.define(version: 20140306191356) do
     t.boolean  "public",     default: false
     t.string   "type"
   end
+
+  create_table "scholarship_iterations", force: true do |t|
+    t.integer  "program_id"
+    t.string   "name"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_iterations", ["program_id", "start", "end"], name: "index_scholarship_iterations_on_program_id_and_start_and_end", unique: true, using: :btree
+
+  create_table "scholarship_iterations_teams", force: true do |t|
+    t.integer  "iteration_id"
+    t.integer  "team_id"
+    t.date     "start"
+    t.date     "end"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scholarship_program_roles", force: true do |t|
+    t.integer  "program_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_program_roles", ["program_id", "role_id"], name: "index_scholarship_program_roles_on_program_id_and_role_id", unique: true, using: :btree
+
+  create_table "scholarship_program_user_roles", force: true do |t|
+    t.integer  "program_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.integer  "team_id"
+    t.text     "covering_letter"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_program_user_roles", ["program_id", "user_id", "role_id"], name: "index_scholarship_program_user_roles_on_program_user_role", unique: true, using: :btree
+
+  create_table "scholarship_programs", force: true do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_programs", ["organization_id", "name"], name: "index_scholarship_programs_on_organization_id_and_name", unique: true, using: :btree
+
+  create_table "scholarship_roles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_roles", ["name"], name: "index_scholarship_roles_on_name", unique: true, using: :btree
+
+  create_table "scholarship_teams", force: true do |t|
+    t.integer  "program_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "kind"
+    t.string   "github_handle"
+    t.string   "twitter_handle"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_teams", ["program_id", "name"], name: "index_scholarship_teams_on_program_id_and_name", unique: true, using: :btree
 
   create_table "things", force: true do |t|
     t.string   "name"
@@ -231,6 +306,11 @@ ActiveRecord::Schema.define(version: 20140306191356) do
     t.integer  "profession_id"
     t.integer  "main_role_id"
     t.text     "foreign_languages"
+    t.string   "github_handle"
+    t.string   "twitter_handle"
+    t.string   "irc_handle"
+    t.string   "timezone"
+    t.string   "location"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
