@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(version: 20140307160706) do
   create_table "scholarship_programs", force: true do |t|
     t.integer  "organization_id"
     t.string   "name"
+    t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

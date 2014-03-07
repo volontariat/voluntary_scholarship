@@ -4,6 +4,7 @@ class AddScholarshipProduct < ActiveRecord::Migration
     create_table :scholarship_programs do |t|
       t.integer :organization_id
       t.string :name
+      t.text :text
       t.timestamps
     end 
     
