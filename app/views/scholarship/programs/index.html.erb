@@ -1,0 +1,27 @@
+<h3><%= t("scholarship_programs.index.title") %></h3>
+<% if @programs.none? || @programs.select{|e| e.id.present? }.none? %>
+<p><%= I18n.t("scholarship_programs.index.empty_collection")%></p>
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <th><%= t("activerecord.attributes.program.name") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @programs.select{|e| e.id.present? }.each do |program| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td>
+        <%= link_to program.name, scholarship_program_path(program) %>
+      </td>
+      <td>
+      	<%= render partial: 'actions', locals: { program: program } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= link_to t("scholarship_programs.new.title"), parent ? new_organization_scholarship_program_path(parent) : new_scholarship_program_path %>

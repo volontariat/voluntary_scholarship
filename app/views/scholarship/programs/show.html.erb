@@ -1,0 +1,13 @@
+<h3>
+  <a name="top">&nbsp;</a>
+  <%= @program.name %>
+</h3>
+
+<dl class="dl-horizontal">
+  <%= show_associations :organization %>
+  <%= render partial: 'actions', locals: { program: @program } %>
+</dl>
+
+<%= markdown @program.text.to_s %>
+
+<%= render 'shared/comments', comment: @program.comments.new %>
