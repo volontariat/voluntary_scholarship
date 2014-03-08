@@ -5,7 +5,8 @@
 <table class="table table-striped">
   <thead>
     <tr class="<%= cycle('odd', 'even') %>">
-      <th><%= t("activerecord.attributes.program.name") %></th>
+      <th><%= t("activerecord.attributes.general.name") %></th>
+      <th><%= t("activerecord.models.organization") %></th>
       <th></th>
     </tr>
   </thead>
@@ -14,6 +15,9 @@
     <tr class="<%= cycle('odd', 'even') %>">
       <td>
         <%= link_to program.name, scholarship_program_path(program) %>
+      </td>
+      <td>
+        <%= link_to program.organization.name, organization_path(program.organization) %>
       </td>
       <td>
       	<%= render partial: 'actions', locals: { program: program } %>
