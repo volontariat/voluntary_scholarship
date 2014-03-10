@@ -325,86 +325,6 @@ CREATE TABLE `schema_migrations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `scholarship_iterations`
---
-
-DROP TABLE IF EXISTS `scholarship_iterations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scholarship_iterations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `program_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `start` datetime DEFAULT NULL,
-  `end` datetime DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `index_scholarship_iterations_on_program_id_and_start_and_end` (`program_id`,`start`,`end`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `scholarship_iterations_teams`
---
-
-DROP TABLE IF EXISTS `scholarship_iterations_teams`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scholarship_iterations_teams` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `iteration_id` int(11) DEFAULT NULL,
-  `team_id` int(11) DEFAULT NULL,
-  `start` date DEFAULT NULL,
-  `end` date DEFAULT NULL,
-  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `scholarship_program_roles`
---
-
-DROP TABLE IF EXISTS `scholarship_program_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scholarship_program_roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `program_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `index_scholarship_program_roles_on_program_id_and_role_id` (`program_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `scholarship_program_user_roles`
---
-
-DROP TABLE IF EXISTS `scholarship_program_user_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scholarship_program_user_roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `program_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  `team_id` int(11) DEFAULT NULL,
-  `covering_letter` text COLLATE utf8_unicode_ci,
-  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `index_scholarship_program_user_roles_on_program_user_role` (`program_id`,`user_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `scholarship_programs`
 --
 
@@ -415,50 +335,11 @@ CREATE TABLE `scholarship_programs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `organization_id` int(11) DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `text` text COLLATE utf8_unicode_ci,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_scholarship_programs_on_organization_id_and_name` (`organization_id`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `scholarship_roles`
---
-
-DROP TABLE IF EXISTS `scholarship_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scholarship_roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `index_scholarship_roles_on_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `scholarship_teams`
---
-
-DROP TABLE IF EXISTS `scholarship_teams`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `scholarship_teams` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `program_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `kind` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `github_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `twitter_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `index_scholarship_teams_on_program_id_and_name` (`program_id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -531,11 +412,6 @@ CREATE TABLE `users` (
   `profession_id` int(11) DEFAULT NULL,
   `main_role_id` int(11) DEFAULT NULL,
   `foreign_languages` text COLLATE utf8_unicode_ci,
-  `github_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `twitter_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `irc_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `timezone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_slug` (`slug`),
@@ -603,7 +479,7 @@ CREATE TABLE `vacancies` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-07 17:07:38
+-- Dump completed on 2014-03-10 20:09:47
 INSERT INTO schema_migrations (version) VALUES ('20140306191343');
 
 INSERT INTO schema_migrations (version) VALUES ('20140306191344');
@@ -635,3 +511,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140306191356');
 INSERT INTO schema_migrations (version) VALUES ('20140307081024');
 
 INSERT INTO schema_migrations (version) VALUES ('20140307160706');
+
+INSERT INTO schema_migrations (version) VALUES ('20140310182713');
