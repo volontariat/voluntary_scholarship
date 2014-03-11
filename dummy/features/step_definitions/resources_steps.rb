@@ -1,6 +1,10 @@
 When /^I delete the (\d+)(?:st|nd|rd|th) "([^\"]*)"$/ do |pos, resource_name|
-  visit eval("#{resource_name.pluralize}_path")
-
+  case resource_name
+  when 'scholarship_iteration' then visit eval("scholarship_program_iterations_path(@program)")
+  else
+    visit eval("#{resource_name.pluralize}_path")
+  end
+  
   within(:row, pos.to_i) { find(:xpath, ".//a[contains(text(), 'Actions')]").click }
   
   page.execute_script 'window.confirm = function () { return true }'

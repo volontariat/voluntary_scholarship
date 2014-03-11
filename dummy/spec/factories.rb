@@ -21,4 +21,10 @@ FactoryGirl.define do
     association :organization
     sequence(:name) { |n| "scholarship program #{n}#{r_str}" } 
   end
+  
+  factory :scholarship_iteration, class: Scholarship::Iteration do
+    association :program, factory: :scholarship_program
+    from Date.new(2014, 6, 1)
+    to Date.new(2014, 9, 1)
+  end
 end

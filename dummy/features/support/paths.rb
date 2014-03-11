@@ -24,11 +24,27 @@ module NavigationHelpers
     when /the scholarship programs page/
       scholarship_programs_path
     
+    when /the new scholarship program page/
+      new_scholarship_program_path
+    
     when /the scholarship program page/
       scholarship_program_path(@program)
       
     when /the edit scholarship program page/
       edit_scholarship_program_path(@program)
+       
+   # scholarship iteration  
+    when /the scholarship iterations page/
+      scholarship_program_iterations_path(@program)
+    
+    when /the new scholarship iteration page/
+      new_scholarship_program_iteration_path(@program)
+    
+    when /the scholarship iteration page/
+      scholarship_iteration_path(@iteration)
+      
+    when /the edit scholarship iteration page/
+      edit_scholarship_iteration_path(@iteration)    
        
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
