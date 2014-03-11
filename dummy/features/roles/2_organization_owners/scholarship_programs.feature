@@ -8,11 +8,20 @@ Feature: Manage scholarship programs
     Given a user named "user"
     And I log in as "user"
 
+  Scenario: Create scholarship program
+    Given an organization named "organization 1" assigned to me
+    When I go to the new scholarship program page
+    And I select "organization 1" from "Organization"
+    And I fill in "Name" with "scholarship program 1"
+    And I press "Create Program"
+    Then I should see "Creation successful"
+    And I should see "Destroy"
+    And I should see "scholarship program 1"
+
   Scenario: Edit scholarship program
     Given an organization named "organization 1" assigned to me
     And a scholarship program named "scholarship program 1" assigned to my organization
     When I go to the edit scholarship program page
-    And I select "organization 1" from "Organization"
     And I fill in "Name" with "scholarship program 2"
     And I press "Update Program"
     Then I should see "Update successful"
