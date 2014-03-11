@@ -5,11 +5,11 @@ module Scholarship
     include Applicat::Mvc::Model::Resource::Base
     
     belongs_to :organization
-    
-    has_many :comments, as: :commentable, dependent: :destroy
+
+    has_many :iterations, class_name: 'Scholarship::Iteration', dependent: :destroy
     
     validates :organization_id, presence: true
-    validates :name, presence: true, uniqueness: true
+    validates :name, presence: true, uniqueness: { scope: [:organization_id] }
     
     attr_accessible :name, :organization_id
     
