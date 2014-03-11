@@ -2,6 +2,8 @@ class Scholarship::ProgramsController < ApplicationController
   include ::Scholarship::BaseController
   include Applicat::Mvc::Controller::Resource
   
+  before_filter :find_program, only: [:new]  
+  
   load_and_authorize_resource
   
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
@@ -9,8 +11,8 @@ class Scholarship::ProgramsController < ApplicationController
   respond_to :html, :js, :json
   
   def index
-    @parent = find_parent Scholarship::Program::PARENT_TYPES
-    @programs = @parent ? @parent.scholarship_programs.order(:name) : Scholarship::Program.order(:name)
+    @organization = find_parent Scholarship::Program::PARENT_TYPES
+    @programs = @organization ? @organization.scholarship_programs.order(:name) : Scholarship::Program.order(:name)
     
     respond_to do |format|
       format.html
@@ -19,12 +21,9 @@ class Scholarship::ProgramsController < ApplicationController
   end
   
   def show
-    @comments = @program.comments
   end
   
   def new
-    @parent = find_parent Scholarship::Program::PARENT_TYPES
-    @program = @parent ? @parent.scholarship_programs.new : Scholarship::Program.new
   end
   
   def create
@@ -59,7 +58,15 @@ class Scholarship::ProgramsController < ApplicationController
   
   private
   
+  def find_program
+    @program = case action_name
+    when 'new' then 
+      @organization = Organization.friendly.find(params[:organization_id]) if params[:organization_id].present?
+      @organization.present? ? @organization.scholarship_programs.new : Scholarship::Program.new
+    end
+  end
+  
   def not_found
-    redirect_to scholarship_programs_path, notice: t('programs.exceptions.not_found')
+    redirect_to scholarship_programs_path, notice: t('general.exceptions.not_found')
   end
 end
