@@ -1,0 +1,19 @@
+en:
+  scholarship_iterations:
+    index:
+      title: Iterations
+      name: Name
+      empty_collection: No iterations available.
+      
+    new: 
+      title: New Iteration
+    edit: 
+      title: Edit Iteration
+    
+  activerecord:    
+    errors:
+      models:
+        scholarship_iteration:
+          attributes:
+            to:
+              to_must_be_greater_than_from: 'must be greater than from'

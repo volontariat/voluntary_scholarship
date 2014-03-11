@@ -1,0 +1,31 @@
+<h3><%= t("scholarship_iterations.index.title") %></h3>
+<% if @iterations.none? || @iterations.select{|e| e.id.present? }.none? %>
+<p><%= I18n.t("scholarship_iterations.index.empty_collection")%></p>
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <th><%= t("activerecord.attributes.general.name") %></th>
+      <th><%= t("activerecord.models.scholarship_program") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @iterations.select{|e| e.id.present? }.each do |iteration| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td>
+        <%= link_to iteration.name, scholarship_iteration_path(iteration) %>
+      </td>
+      <td>
+        <%= link_to iteration.program.name, scholarship_program_path(iteration.program) %>
+      </td>
+      <td>
+      	<%= render partial: 'actions', locals: { iteration: iteration } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= link_to t("scholarship_iterations.new.title"), new_scholarship_program_iteration_path(@program) %>

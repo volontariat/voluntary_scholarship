@@ -1,0 +1,27 @@
+<% if !iteration.is_a?(Column) && (
+	can?(:destroy, iteration) || can?(:edit, iteration) || (
+      iteration.respond_to?(:state_events) && iteration.state_events.select{|event| can? event, iteration }.any?
+    )
+) %>
+<div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t('general.actions') %></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  <% if can? :destroy, iteration %>    
+    <li>
+      <%= link_to(
+        t('general.destroy'), scholarship_iteration_path(iteration.id), id: "iteration_#{iteration.id}", method: :delete, 
+        confirm: t('general.questions.are_you_sure'),
+        onclick: "delete_link('iteration_#{iteration.id}'); return false;"
+      ) %>
+    </li>
+  <% end %>
+  <% if can? :edit, iteration %>    
+    <li><%= link_to t('general.edit'), eval("edit_scholarship_iteration_path(iteration)") %></li>
+  <% end %>
+  <% if iteration.respond_to? :state_events %>
+    <li class="divider"></li>
+  <% end %>
+  <%= render 'shared/resource/event_elements', resource: iteration, type: 'iterations' %>
+  </ul>
+</div>
+<% end %>

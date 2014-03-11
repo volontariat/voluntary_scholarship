@@ -1,0 +1,9 @@
+<h3>
+  <a name="top">&nbsp;</a>
+  <%= @iteration.name %>
+</h3>
+
+<dl class="dl-horizontal">
+  <%= show_associations :program %>
+  <%= render partial: 'actions', locals: { iteration: @iteration } %>
+</dl>

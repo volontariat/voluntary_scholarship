@@ -1,0 +1,14 @@
+<%= simple_form_for(@iteration, html: {class: 'form-horizontal'}) do |f| %>
+  <%= f.hidden_field :program_id %>
+  <%= render partial: 'shared/form/error_messages', locals: { resource: @iteration } %>
+  
+  <div class="form-inputs">
+  	<%= f.input :name %>  
+  	<%= f.input :from, as: :string, input_html: { class: 'datepicker' } %> 
+  	<%= f.input :to, as: :string, input_html: { class: 'datepicker' } %>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
