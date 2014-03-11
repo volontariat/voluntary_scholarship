@@ -28,4 +28,4 @@
 </table>
 <% end %>
 
-<%= link_to t("scholarship_programs.new.title"), parent ? new_organization_scholarship_program_path(parent) : new_scholarship_program_path %>
+<%= link_to t("scholarship_programs.new.title"), @organization ? new_organization_scholarship_program_path(@organization) : new_scholarship_program_path %>
