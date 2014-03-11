@@ -9,3 +9,7 @@ en:
       title: New Program
     edit: 
       title: Edit Program
+      
+  activerecord:
+    models:
+      scholarship_program: Scholarship program
