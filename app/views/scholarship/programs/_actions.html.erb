@@ -1,8 +1,4 @@
-<% if !program.is_a?(Column) && (
-	can?(:destroy, program) || can?(:edit, program) || (
-      program.respond_to?(:state_events) && program.state_events.select{|event| can? event, program }.any?
-    )
-) %>
+<% if can?(:destroy, program) || can?(:edit, program) %>
 <div class="dropdown">
   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t('general.actions') %></a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -18,10 +14,6 @@
   <% if can? :edit, program %>    
     <li><%= link_to t('general.edit'), eval("edit_scholarship_program_path(program)") %></li>
   <% end %>
-  <% if program.respond_to? :state_events %>
-    <li class="divider"></li>
-  <% end %>
-  <%= render 'shared/resource/event_elements', resource: program, type: 'programs' %>
   </ul>
 </div>
 <% end %>
