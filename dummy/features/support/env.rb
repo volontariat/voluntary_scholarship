@@ -30,6 +30,11 @@ Spork.prefork do
   Capybara.add_selector(:row) do
     xpath { |num| ".//tbody/tr[#{num}]" }
   end
+  
+  Capybara.server do |app, port|
+    require 'rack/handler/webrick'
+    Rack::Handler::WEBrick.run(app, :Port => port, :AccessLog => [], :Logger => WEBrick::Log::new(Rails.root.join("log/capybara_test.log").to_s))
+  end
 end
 
 Spork.each_run do
