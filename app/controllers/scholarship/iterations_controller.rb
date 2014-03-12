@@ -8,16 +8,9 @@ class Scholarship::IterationsController < ApplicationController
   
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
-  respond_to :html, :js, :json
-  
   def index
     @program = Scholarship::Program.find(params[:program_id])
-    @iterations = @program.iterations.order('scholarship_iterations.from DESC') 
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @iterations.tokens(params[:q]) }
-    end
+    @iterations = @program.iterations.paginate(page: params[:page], per_page: 25).order('scholarship_iterations.from DESC') 
   end
   
   def show

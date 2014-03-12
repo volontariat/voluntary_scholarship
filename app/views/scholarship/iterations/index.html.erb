@@ -28,4 +28,6 @@
 </table>
 <% end %>
 
+<%= will_paginate @iterations %>
+
 <%= link_to t("scholarship_iterations.new.title"), new_scholarship_program_iteration_path(@program) %>

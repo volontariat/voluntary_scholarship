@@ -8,16 +8,10 @@ class Scholarship::ProgramsController < ApplicationController
   
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
-  respond_to :html, :js, :json
-  
   def index
     @organization = find_parent Scholarship::Program::PARENT_TYPES
     @programs = @organization ? @organization.scholarship_programs.order(:name) : Scholarship::Program.order(:name)
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @programs.tokens(params[:q]) }
-    end
+    @programs = @programs.paginate(page: params[:page], per_page: 25)
   end
   
   def show
