@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'voluntary'
 
+  s.add_dependency 'bitmask_attributes', '~> 1.0.0'
+
   # group :development
   s.add_development_dependency 'letter_opener', '~> 1.0.0'
 
