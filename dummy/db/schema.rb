@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310203823) do
+ActiveRecord::Schema.define(version: 20140311174333) do
 
   create_table "areas", force: true do |t|
     t.string   "ancestry"
@@ -200,6 +200,32 @@ ActiveRecord::Schema.define(version: 20140310203823) do
   end
 
   add_index "scholarship_programs", ["organization_id", "name"], name: "index_scholarship_programs_on_organization_id_and_name", unique: true, using: :btree
+
+  create_table "scholarship_team_memberships", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.integer  "roles"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_team_memberships", ["team_id", "user_id"], name: "index_scholarship_team_memberships_on_team_id_and_user_id", unique: true, using: :btree
+
+  create_table "scholarship_teams", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.text     "text"
+    t.string   "kind"
+    t.string   "github_handle"
+    t.string   "twitter_handle"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_teams", ["name"], name: "index_scholarship_teams_on_name", unique: true, using: :btree
+  add_index "scholarship_teams", ["slug"], name: "index_scholarship_teams_on_slug", unique: true, using: :btree
 
   create_table "things", force: true do |t|
     t.string   "name"

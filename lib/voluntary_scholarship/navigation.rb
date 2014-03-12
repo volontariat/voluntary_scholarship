@@ -25,7 +25,7 @@ module VoluntaryScholarship
           
           instance_exec primary, VoluntaryScholarship::Navigation.voluntary_menu_options[:organizations], &::Voluntary::Navigation.menu_code(:organizations)
           
-          primary.item :programs, I18n.t('scholarship_programs.index.title'), scholarship_programs_path do |programs|
+          primary.item :programs, I18n.t('scholarship_programs.index.short_title'), scholarship_programs_path do |programs|
             programs.item :new, I18n.t('general.new'), new_scholarship_program_path
             
             unless (@program.new_record? rescue true)
@@ -36,7 +36,7 @@ module VoluntaryScholarship
       
                 program.item :show, I18n.t('general.details'), "#{scholarship_program_path(@program)}#top"
                 program.item :edit, I18n.t('general.edit'), edit_scholarship_program_path(@program) if can? :edit, @program
-                program.item :iterations, I18n.t('scholarship_iterations.index.title'), scholarship_program_iterations_path(@program) do |iterations|
+                program.item :iterations, I18n.t('scholarship_iterations.index.short_title'), scholarship_program_iterations_path(@program) do |iterations|
                   iterations.item :new, I18n.t('general.new'), new_scholarship_program_iteration_path(@program)
                 
                   unless (@iteration.new_record? rescue true)
@@ -53,6 +53,21 @@ module VoluntaryScholarship
                     end
                   end
                 end
+              end
+            end
+          end
+          
+          primary.item :teams, I18n.t('scholarship_teams.index.short_title'), scholarship_teams_path do |teams|
+            teams.item :new, I18n.t('general.new'), new_scholarship_team_path
+            
+            unless (@team.new_record? rescue true)
+              teams.item :show, @team.name, scholarship_team_path(@team) do |team|
+                if can? :destroy, @team
+                  team.item :destroy, I18n.t('general.destroy'), scholarship_team_path(@team), method: :delete, confirm: I18n.t('general.questions.are_you_sure')
+                end
+      
+                team.item :show, I18n.t('general.details'), "#{scholarship_team_path(@team)}#top"
+                team.item :edit, I18n.t('general.edit'), edit_scholarship_team_path(@team) if can? :edit, @team
               end
             end
           end

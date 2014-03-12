@@ -1,0 +1,15 @@
+<%= simple_form_for(@team, html: {class: 'form-horizontal'}) do |f| %>
+  <%= render partial: 'shared/form/error_messages', locals: { resource: @team } %>
+  
+  <div class="form-inputs">
+  	<%= f.input :kind, as: :radio_buttons, collection: Scholarship::Team::KINDS.map { |k| [k.capitalize, k] }, blank: false, label: t('activerecord.attributes.scholarship/team.kind') %>
+    <%= f.input :name, label: t('attributes.name') %>  
+    <%= f.input :github_handle, label: t('activerecord.attributes.scholarship/team.github_handle') %>
+    <%= f.input :twitter_handle, label: t('activerecord.attributes.scholarship/team.twitter_handle') %>
+    <%= f.input :text, label: t('attributes.text'), input_html: {style: 'width: 500px; height:300px;'} %>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

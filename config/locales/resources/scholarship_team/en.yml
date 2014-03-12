@@ -1,0 +1,23 @@
+en:
+  scholarship_teams:
+    index:
+      title: Scholarship Teams
+      short_title: Teams
+      name: Name
+      empty_collection: No scholarship teams available.
+      
+    new: 
+      title: New Scholarship Team
+    edit: 
+      title: Edit Scholarship Team
+        
+  activerecord:
+    models:
+      scholarship/team: Scholarship Team
+      
+    attributes:  
+      scholarship/team:
+        kind: Kind
+        github_handle: Github handle
+        twitter_handle: Twitter handle
+        text: Text 

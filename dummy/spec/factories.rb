@@ -22,6 +22,12 @@ FactoryGirl.define do
     sequence(:name) { |n| "scholarship program #{n}#{r_str}" } 
   end
   
+  factory :scholarship_team, class: Scholarship::Team do
+    association :leader, factory: :user
+    kind 'sponsored'
+    sequence(:name) { |n| "scholarship program #{n}#{r_str}" } 
+  end
+  
   factory :scholarship_iteration, class: Scholarship::Iteration do
     association :program, factory: :scholarship_program
     from Date.new(2014, 6, 1)

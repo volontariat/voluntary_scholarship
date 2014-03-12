@@ -1,0 +1,29 @@
+<h3><%= t("scholarship_teams.index.title") %></h3>
+<% if @teams.none? || @teams.select{|e| e.id.present? }.none? %>
+<p><%= I18n.t("scholarship_teams.index.empty_collection")%></p>
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <th><%= t("activerecord.attributes.general.name") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @teams.select{|e| e.id.present? }.each do |team| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td>
+        <%= link_to team.name, scholarship_team_path(team) %>
+      </td>
+      <td>
+      	<%= render partial: 'actions', locals: { team: team } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= will_paginate @teams %>
+
+<%= link_to t("scholarship_teams.new.title"), new_scholarship_team_path %>

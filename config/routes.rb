@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       resources :iterations, only: [:index, :new]
     end
     
+    resources :teams
+    
     resources :iterations, only: [:create, :show, :edit, :update, :destroy]
   end
   

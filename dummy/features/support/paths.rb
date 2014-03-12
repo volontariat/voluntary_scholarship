@@ -33,6 +33,19 @@ module NavigationHelpers
     when /the edit scholarship program page/
       edit_scholarship_program_path(@program)
        
+    # scholarship team  
+    when /the scholarship teams page/
+      scholarship_teams_path
+    
+    when /the new scholarship team page/
+      new_scholarship_team_path
+    
+    when /the scholarship team page/
+      scholarship_team_path(@team)
+      
+    when /the edit scholarship team page/
+      edit_scholarship_team_path(@team)       
+       
    # scholarship iteration  
     when /the scholarship iterations page/
       scholarship_program_iterations_path(@program)

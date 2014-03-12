@@ -364,6 +364,50 @@ CREATE TABLE `scholarship_programs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `scholarship_team_memberships`
+--
+
+DROP TABLE IF EXISTS `scholarship_team_memberships`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `scholarship_team_memberships` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `team_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `roles` int(11) DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_scholarship_team_memberships_on_team_id_and_user_id` (`team_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `scholarship_teams`
+--
+
+DROP TABLE IF EXISTS `scholarship_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `scholarship_teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `text` text COLLATE utf8_unicode_ci,
+  `kind` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `github_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `twitter_handle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_scholarship_teams_on_name` (`name`),
+  UNIQUE KEY `index_scholarship_teams_on_slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `things`
 --
 
@@ -499,7 +543,7 @@ CREATE TABLE `vacancies` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-11 11:15:39
+-- Dump completed on 2014-03-12 13:47:45
 INSERT INTO schema_migrations (version) VALUES ('20140306191343');
 
 INSERT INTO schema_migrations (version) VALUES ('20140306191344');
@@ -535,3 +579,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140307160706');
 INSERT INTO schema_migrations (version) VALUES ('20140310182713');
 
 INSERT INTO schema_migrations (version) VALUES ('20140310203823');
+
+INSERT INTO schema_migrations (version) VALUES ('20140311174333');

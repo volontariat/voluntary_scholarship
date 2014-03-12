@@ -1,0 +1,19 @@
+<% if can?(:destroy, team) || can?(:edit, team) %>
+<div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t('general.actions') %></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  <% if can? :destroy, team %>    
+    <li>
+      <%= link_to(
+        t('general.destroy'), scholarship_team_path(team.id), id: "team_#{team.id}", method: :delete, 
+        confirm: t('general.questions.are_you_sure'),
+        onclick: "delete_link('team_#{team.id}'); return false;"
+      ) %>
+    </li>
+  <% end %>
+  <% if can? :edit, team %>    
+    <li><%= link_to t('general.edit'), eval("edit_scholarship_team_path(team)") %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

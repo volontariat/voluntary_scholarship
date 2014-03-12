@@ -1,0 +1,19 @@
+<h3>
+  <a name="top">&nbsp;</a>
+  <%= @team.name %>
+</h3>
+
+<dl class="dl-horizontal">
+	<%= show_attribute(:kind) %>
+	<%= show_attribute(
+	  :github_handle, 
+	  value: @team.github_handle.blank? ? '' : link_to(@team.github_handle, "http://github.com/#{@team.github_handle}")
+	) %>
+	<%= show_attribute(
+	  :twitter_handle, 
+	  value: @team.twitter_handle.blank? ? '' : link_to(@team.twitter_handle, "http://twitter.com/#{@team.twitter_handle}.gsub('@', '')")
+	) %>
+  <dt>&nbsp;</dt><dd><%= render partial: 'actions', locals: { team: @team } %></dd>
+</dl>
+
+<%= markdown @team.text.to_s %>
