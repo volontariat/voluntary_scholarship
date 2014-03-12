@@ -13,7 +13,7 @@ Feature: Manage scholarship programs
     When I go to the new scholarship program page
     And I select "organization 1" from "Organization"
     And I fill in "Name" with "scholarship program 1"
-    And I press "Create Program"
+    And I press "Create Scholarship Program"
     Then I should see "Creation successful"
     And I should see "Destroy"
     And I should see "scholarship program 1"
@@ -23,7 +23,7 @@ Feature: Manage scholarship programs
     And a scholarship program named "scholarship program 1" assigned to my organization
     When I go to the edit scholarship program page
     And I fill in "Name" with "scholarship program 2"
-    And I press "Update Program"
+    And I press "Update Scholarship Program"
     Then I should see "Update successful"
     And I should see "Destroy"
     And I should see "scholarship program 2"

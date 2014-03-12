@@ -15,7 +15,7 @@ Feature: Manage scholarship iterations
     And I fill in "Name" with "scholarship iteration 1"
     And I fill in "From" with "2014-06-01"
     And I fill in "To" with "2014-09-01"
-    And I press "Create Iteration"
+    And I press "Create Scholarship Iteration"
     Then I should see "Creation successful"
     And I should see "Destroy"
     And I should see "scholarship iteration 1"
@@ -26,7 +26,7 @@ Feature: Manage scholarship iterations
     And a scholarship iteration named "scholarship iteration 1" assigned to my scholarship program
     When I go to the edit scholarship iteration page
     And I fill in "Name" with "scholarship iteration 2"
-    And I press "Update Iteration"
+    And I press "Update Scholarship Iteration"
     Then I should see "Update successful"
     And I should see "Destroy"
     And I should see "scholarship iteration 2"

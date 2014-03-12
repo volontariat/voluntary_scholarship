@@ -1,16 +1,19 @@
 en:
   scholarship_iterations:
     index:
-      title: Iterations
+      title: Scholarship Iterations
+      short_title: Iterations
       name: Name
-      empty_collection: No iterations available.
+      empty_collection: No scholarship iterations available.
       
     new: 
-      title: New Iteration
+      title: New Scholarship Iteration
     edit: 
-      title: Edit Iteration
+      title: Edit Scholarship Iteration
     
   activerecord:    
+    models:
+      scholarship/iteration: Scholarship Iteration
     errors:
       models:
         scholarship_iteration:

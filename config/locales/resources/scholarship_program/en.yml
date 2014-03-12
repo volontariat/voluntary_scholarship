@@ -1,15 +1,16 @@
 en:
   scholarship_programs:
     index:
-      title: Programs
+      title: Scholarship Programs
+      short_title: Programs
       name: Name
-      empty_collection: No programs available.
+      empty_collection: No scholarship programs available.
       
     new: 
-      title: New Program
+      title: New Scholarship Program
     edit: 
-      title: Edit Program
+      title: Edit Scholarship Program
       
   activerecord:
     models:
-      scholarship_program: Scholarship program
+      scholarship/program: Scholarship Program
