@@ -17,7 +17,7 @@ class Scholarship::TeamsController < ApplicationController
   end
   
   def new
-    @team = Scholarship::Team.new#(kind: 'sponsored')
+    @team = Scholarship::Team.new(kind: 'sponsored')
   end
   
   def create
