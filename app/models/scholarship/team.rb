@@ -27,6 +27,7 @@ module Scholarship
       membership = memberships.new(roles: [:team_leader])
       membership.user_id = leader.try(:id)
       membership.save!
+      membership.accept!
     end
   end
 end

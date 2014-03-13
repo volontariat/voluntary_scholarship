@@ -11,7 +11,9 @@ describe Scholarship::Team do
           team.leader = user
           team.save!
           
-          Scholarship::TeamMembership.where(team_id: team.id, user_id: user.id).first.roles.should == [:team_leader]
+          team_membership = Scholarship::TeamMembership.where(team_id: team.id, user_id: user.id).first
+          team_membership.roles.should == [:team_leader]
+          team_membership.accepted?.should be_true
         end
       end
       
