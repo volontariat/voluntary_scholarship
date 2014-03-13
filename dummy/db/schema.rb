@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20140311174333) do
     t.integer  "team_id"
     t.integer  "user_id"
     t.integer  "roles"
+    t.text     "text"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"

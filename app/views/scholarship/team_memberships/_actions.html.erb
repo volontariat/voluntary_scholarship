@@ -1,0 +1,13 @@
+<% if can?(:destroy, team_membership) || can?(:edit, team_membership) %>
+<div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t('general.actions') %></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  <% if can? :destroy, team_membership %>    
+    <li><%= destroy_scholarship_team_membership_link(team_membership) %></li>
+  <% end %>
+  <% if can? :edit, team_membership %>    
+    <li><%= link_to t('general.edit'), eval("edit_scholarship_team_membership_path(team_membership)") %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>

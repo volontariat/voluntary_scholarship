@@ -6,7 +6,11 @@ Rails.application.routes.draw do
       resources :iterations, only: [:index, :new]
     end
     
-    resources :teams
+    resources :teams do
+      resources :members, controller: 'team_memberships', only: [:index, :new]
+    end
+    
+    resources :team_memberships, only: [:create, :edit, :update, :destroy]
     
     resources :iterations, only: [:create, :show, :edit, :update, :destroy]
   end

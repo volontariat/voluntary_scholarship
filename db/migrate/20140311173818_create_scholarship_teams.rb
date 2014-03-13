@@ -18,6 +18,7 @@ class CreateScholarshipTeams < ActiveRecord::Migration
       t.integer :team_id
       t.integer :user_id
       t.integer :roles
+      t.text :text
       t.string :state
       t.timestamps
     end 

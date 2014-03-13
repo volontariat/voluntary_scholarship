@@ -46,6 +46,16 @@ module NavigationHelpers
     when /the edit scholarship team page/
       edit_scholarship_team_path(@team)       
        
+    # scholarship team membership
+    when /the scholarship team memberships page/
+      scholarship_team_members_path(@team)
+    
+    when /the new scholarship team membership page/
+      new_scholarship_team_member_path(@team)
+      
+    when /the edit scholarship team membership page/
+      edit_scholarship_team_membership_path(@team_membership)           
+       
    # scholarship iteration  
     when /the scholarship iterations page/
       scholarship_program_iterations_path(@program)

@@ -375,6 +375,7 @@ CREATE TABLE `scholarship_team_memberships` (
   `team_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `roles` int(11) DEFAULT NULL,
+  `text` text COLLATE utf8_unicode_ci,
   `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -543,7 +544,7 @@ CREATE TABLE `vacancies` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-12 13:47:45
+-- Dump completed on 2014-03-13 10:25:19
 INSERT INTO schema_migrations (version) VALUES ('20140306191343');
 
 INSERT INTO schema_migrations (version) VALUES ('20140306191344');

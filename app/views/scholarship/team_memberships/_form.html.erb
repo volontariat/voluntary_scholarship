@@ -1,0 +1,22 @@
+<%= simple_form_for(@team_membership, html: {class: 'form-horizontal'}) do |f| %>
+  <%= f.input :team_id, as: :hidden %>
+  <%= render partial: 'shared/form/error_messages', locals: { resource: @team_membership } %>
+  
+  <div class="form-inputs">
+  	<% if can_update_scholarship_team_membership_roles?(@team_membership) %>
+  	  <%= f.input :roles, as: :check_boxes, collection: Scholarship::TeamMembership::ROLES.map { |r| [r.capitalize, r] }, include_hidden: false, label: t('attributes.roles') %>
+    <% else %>
+      <div class="control-group string required">
+      	<label class="string required control-label">
+      		<abbr title="required">*</abbr> Roles
+        </label>
+        <div class="controls"><%= @team_membership.roles.map(&:to_s).map(&:humanize).join(', ') %></div>
+      </div>  
+    <% end %>
+    <%= f.input :text, label: t('attributes.text'), input_html: {style: 'width: 500px; height:300px;'} %>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

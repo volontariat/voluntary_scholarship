@@ -13,11 +13,16 @@ module VoluntaryScholarship
     end
     
     config.to_prepare do
+      User.send :include, ::VoluntaryScholarship::Concerns::Model::User::HasScholarshipTeams
       Organization.send :include, ::VoluntaryScholarship::Concerns::Model::HasScholarshipPrograms
       
       ::Ability.add_after_initialize_callback(VoluntaryScholarship::Ability.after_initialize)
       
       VoluntaryScholarship::Navigation.voluntary_menu_customization
+    end
+    
+    initializer "voluntary_scholarship.add_view_helpers" do |config|
+      ActionView::Base.send :include, VoluntaryScholarship::TeamMembershipsHelper
     end
   end
 end

@@ -1,0 +1,17 @@
+en:
+  scholarship_team_memberships:
+    index:
+      title: Team Members
+      name: Name
+      empty_collection: No scholarship team memberships available.
+      
+    new: 
+      title: Join Team
+    edit: 
+      title: Edit Team Membership
+    destroy:
+      title: Leave Team
+          
+  activerecord:
+    models:
+      scholarship/team_membership: Scholarship Team Membership

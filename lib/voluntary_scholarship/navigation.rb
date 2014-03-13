@@ -68,6 +68,19 @@ module VoluntaryScholarship
       
                 team.item :show, I18n.t('general.details'), "#{scholarship_team_path(@team)}#top"
                 team.item :edit, I18n.t('general.edit'), edit_scholarship_team_path(@team) if can? :edit, @team
+                team.item :members, I18n.t('scholarship_team_memberships.index.title'), scholarship_team_members_path(@team) do |team_members|
+                  team_members.item(
+                    :new, I18n.t('scholarship_team_memberships.new.title'), new_scholarship_team_member_path(@team), 
+                    highlights_on: -> { params[:controller] == 'scholarship/team_memberships' && ['new', 'create'].include?(params[:action]) }
+                  )
+                  
+                  unless (@team_membership.new_record? rescue true)
+                    team_members.item(
+                      :edit, I18n.t('scholarship_team_memberships.edit.title'), edit_scholarship_team_membership_path(@team_membership),
+                      highlights_on: -> { params[:controller] == 'scholarship/team_memberships' && ['edit', 'update'].include?(params[:action]) }
+                    )
+                  end
+                end
               end
             end
           end
