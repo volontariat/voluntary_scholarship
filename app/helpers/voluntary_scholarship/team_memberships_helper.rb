@@ -11,7 +11,7 @@ module VoluntaryScholarship
       link_to(
         t('scholarship_team_memberships.destroy.title'), 
         scholarship_team_membership_path(team_membership.id), id: "team_membership_#{team_membership.id}", method: :delete, 
-        confirm: t('general.questions.are_you_sure'),
+        data: { confirm: t('general.questions.are_you_sure') },
         onclick: "delete_link('team_membership_#{team_membership.id}'); return false;"
       )
     end

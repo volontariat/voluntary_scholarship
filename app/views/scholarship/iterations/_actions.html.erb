@@ -6,7 +6,7 @@
     <li>
       <%= link_to(
         t('general.destroy'), scholarship_iteration_path(iteration.id), id: "iteration_#{iteration.id}", method: :delete, 
-        confirm: t('general.questions.are_you_sure'),
+        data: { confirm: t('general.questions.are_you_sure') },
         onclick: "delete_link('iteration_#{iteration.id}'); return false;"
       ) %>
     </li>
