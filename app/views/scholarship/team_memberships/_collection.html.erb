@@ -5,10 +5,10 @@
 <table class="table table-striped">
   <thead>
     <tr class="<%= cycle('odd', 'even') %>">
+      <th><%= t('activerecord.models.user') %></th>
   <% if show_team %>
       <th><%= t('activerecord.models.scholarship/team') %></th>
   <% end %>
-      <th><%= t('activerecord.models.user') %></th>
       <th><%= t('attributes.roles') %></th>
       <th></th>
     </tr>
@@ -16,14 +16,14 @@
   <tbody>
   <% @team_memberships.select{|e| e.id.present? }.each do |team_membership| %>
     <tr class="<%= cycle('odd', 'even') %>">
+      <td>
+        <%= link_to team_membership.user.full_name, user_path(team_membership.user) %>
+      </td>
     <% if show_team %> 
       <td>
       	<%= link_to team_membership.team, scholarship_team_path(team_membership.team) %>
       </td>
     <% end %>
-      <td>
-        <%= link_to team_membership.user.full_name, user_path(team_membership.user) %>
-      </td>
       <td>
       	<%= team_membership.roles.map(&:to_s).map(&:humanize).join(', ') %>
       </td>

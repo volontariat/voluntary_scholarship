@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311174333) do
+ActiveRecord::Schema.define(version: 20140314155742) do
 
   create_table "areas", force: true do |t|
     t.string   "ancestry"
@@ -179,6 +179,19 @@ ActiveRecord::Schema.define(version: 20140311174333) do
     t.boolean  "public",     default: false
     t.string   "type"
   end
+
+  create_table "scholarship_iteration_participations", force: true do |t|
+    t.integer  "iteration_id"
+    t.integer  "user_id"
+    t.integer  "roles"
+    t.integer  "team_id"
+    t.text     "text"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scholarship_iteration_participations", ["iteration_id", "user_id"], name: "index_scholarship_iteration_participations_on_iteration_user", unique: true, using: :btree
 
   create_table "scholarship_iterations", force: true do |t|
     t.integer  "program_id"

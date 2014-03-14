@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe 'scholarship/team_memberships/_form.html.erb' do
   before :each do
-    @membership = FactoryGirl.create(:scholarship_team_membership)
-    assign(:membership, @membership)
+    @team_membership = FactoryGirl.create(:scholarship_team_membership)
+    assign(:team_membership, @team_membership)
   end
   
   describe 'roles field' do
     context 'user can update scholarship team membership roles' do
       it 'shows the field' do
-        view.stub!(:can_update_scholarship_membership_roles?).with(@membership).and_return(true)
+        view.stub!(:can_update_scholarship_team_membership_roles?).with(@team_membership).and_return(true)
         
         render
         
@@ -19,7 +19,7 @@ describe 'scholarship/team_memberships/_form.html.erb' do
     
     context 'user cannot update scholarship team membership roles' do
       it 'shows a list of roles instead of the field' do
-        view.stub!(:can_update_scholarship_membership_roles?).with(@membership).and_return(false)
+        view.stub!(:can_update_scholarship_team_membership_roles?).with(@team_membership).and_return(false)
         
         render
         

@@ -6,7 +6,7 @@ describe VoluntaryScholarship::TeamMembershipsHelper do
       it 'returns true' do
         stub!(:current_user).and_return(FactoryGirl.create(:master_user))
         
-        can_update_scholarship_team_membership_roles?(nil).should be_true
+        can_update_scholarship_team_membership_roles?(FactoryGirl.build(:scholarship_team_membership)).should be_true
       end
     end
       

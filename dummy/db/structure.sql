@@ -325,6 +325,28 @@ CREATE TABLE `schema_migrations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `scholarship_iteration_participations`
+--
+
+DROP TABLE IF EXISTS `scholarship_iteration_participations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `scholarship_iteration_participations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iteration_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `roles` int(11) DEFAULT NULL,
+  `team_id` int(11) DEFAULT NULL,
+  `text` text COLLATE utf8_unicode_ci,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_scholarship_iteration_participations_on_iteration_user` (`iteration_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `scholarship_iterations`
 --
 
@@ -544,7 +566,7 @@ CREATE TABLE `vacancies` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-13 10:25:19
+-- Dump completed on 2014-03-14 19:38:57
 INSERT INTO schema_migrations (version) VALUES ('20140306191343');
 
 INSERT INTO schema_migrations (version) VALUES ('20140306191344');
@@ -582,3 +604,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140310182713');
 INSERT INTO schema_migrations (version) VALUES ('20140310203823');
 
 INSERT INTO schema_migrations (version) VALUES ('20140311174333');
+
+INSERT INTO schema_migrations (version) VALUES ('20140314155742');

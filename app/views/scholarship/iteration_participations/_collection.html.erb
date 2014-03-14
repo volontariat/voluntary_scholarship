@@ -1,0 +1,51 @@
+<% show_iteration ||= false %>
+<% if @iteration_participations.none? || @iteration_participations.select{|e| e.id.present? }.none? %>
+<p><%= I18n.t("scholarship_iteration_participations.index.empty_collection")%></p>
+<% else %>
+<table class="table table-striped">
+  <thead>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <th><%= t('activerecord.models.user') %></th>
+  <% if show_iteration %>
+      <th><%= t('activerecord.models.scholarship/organization') %></th>
+      <th><%= t('activerecord.models.scholarship/iteration') %></th>
+  <% end %>
+      <th><%= t('attributes.roles') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @iteration_participations.select{|e| e.id.present? }.each do |iteration_participation| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td>
+        <%= link_to iteration_participation.user.full_name, user_path(iteration_participation.user) %>
+      </td>
+    <% if show_iteration %> 
+      <td>
+      	<%= link_to iteration_participation.iteration.program.organization, organization_path(iteration_participation.iteration.program.organization) %>
+      </td>
+      <td>
+      	<%= link_to iteration_participation.iteration, scholarship_iteration_path(iteration_participation.iteration) %>
+      </td>
+    <% end %>
+      <td>
+      	<%= iteration_participation.roles.map(&:to_s).map(&:humanize).join(', ') %>
+      </td>
+      <td>
+      	<%= render partial: 'scholarship/iteration_participations/actions', locals: { iteration_participation: iteration_participation } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= will_paginate @iteration_participations %>
+
+<% if @iteration.present? %>
+	<% if current_user.is_participant_of_scholarship_iteration?(@iteration) %>
+	  <%= destroy_scholarship_iteration_participation_link(current_user.participation_of_scholarship_iteration(@iteration)) %>
+	<% elsif can?(:create, Scholarship::IterationParticipation) %>
+	  <%= link_to t("scholarship_iteration_participations.new.title"), new_scholarship_iteration_participant_path(@iteration) %>
+	<% end %>
+<% end %>

@@ -1,0 +1,18 @@
+<% if can?(:destroy, iteration_participation) || can?(:edit, iteration_participation) %>
+<div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t('general.actions') %></a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  <% if can? :destroy, iteration_participation %>    
+    <li><%= destroy_scholarship_iteration_participation_link(iteration_participation) %></li>
+  <% end %>
+  <% if can? :edit, iteration_participation %>    
+    <li><%= link_to t('general.edit'), eval("edit_scholarship_iteration_participation_path(iteration_participation)") %></li>
+  <% end %>
+  
+  <% if iteration_participation.state_events.select{|event| can? event, iteration_participation }.any? %>
+  <li class="divider"></li>
+  <% end %>
+  <%= render 'shared/resource/event_elements', resource: iteration_participation, type: 'scholarship_iteration_participations' %>
+  </ul>
+</div>
+<% end %>

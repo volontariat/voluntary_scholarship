@@ -3,9 +3,10 @@ en:
   products:
     scholarship:
       workflow:
+        organization_owner:
+          index:
+            title: Organization Owner
+            
         team_leader:
           index:
             title: Team Leader
-        user:
-          index:
-            title: User

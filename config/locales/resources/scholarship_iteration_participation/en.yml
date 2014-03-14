@@ -1,0 +1,39 @@
+en:
+  scholarship_iteration_participations:
+    index:
+      title: Participants
+      name: Name
+      empty_collection: No scholarship iteration participants available.
+      
+    new: 
+      title: Join Iteration
+    edit: 
+      title: Edit Iteration Participation
+    destroy:
+      title: Leave Iteration
+    
+    show:
+      events:
+        accept: Accept
+        deny: Deny
+        change_roles: Change roles
+          
+    workflow:
+      title: Iteration Participations
+      requested: Requested
+      accepted: Accepted
+      changed_roles: Changed roles
+      denied:       
+          
+  activerecord:
+    models:
+      scholarship/iteration_participation: Scholarship Iteration Participation
+      
+    errors:
+      models:
+        scholarship/iteration_participation:
+          attributes:
+            team_id:
+              no_team_membership: You have not joined the team yet.
+              no_accepted_team_membership: Your team membership has not been accepted yet.
+              team_role_not_included_in_team_membership_roles: Your team membership roles does not include at least one of your team roles.

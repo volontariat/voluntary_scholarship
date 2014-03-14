@@ -1,0 +1,24 @@
+<h3><%= t('scholarship_iteration_participations.workflow.title') %></h3>
+<div class="tabs">
+	<ul>
+	  <li><a href="#requested_team_memberships"><%= t('scholarship_iteration_participations.workflow.requested') %></a></li>
+	  <li>
+	  	<a href="<%= with_state_scholarship_iteration_participations_path(state: 'accepted') %>">
+	  		<%= t('scholarship_iteration_participations.workflow.accepted') %>
+	    </a>
+	  </li>
+	  <li>
+	  	<a href="<%= with_state_scholarship_iteration_participations_path(state: 'changed_roles') %>">
+	  		<%= t('scholarship_iteration_participations.workflow.changed_roles') %>
+	    </a>
+	  </li>
+	  <li>
+	  	<a href="<%= with_state_scholarship_iteration_participations_path(state: 'denied') %>">
+	  		<%= t('scholarship_iteration_participations.workflow.denied') %>
+	    </a>
+	  </li>
+	</ul>
+	<div id="requested_team_memberships">
+		<%= render 'scholarship/iteration_participations/collection', locals: { show_team: true } %>
+	</div>
+</div>

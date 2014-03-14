@@ -50,6 +50,12 @@ class Scholarship::IterationsController < ApplicationController
     @iteration
   end
   
+  protected
+  
+  def set_twitter_sidenav_level
+    @twitter_sidenav_level = 5
+  end
+  
   private
   
   def find_iteration

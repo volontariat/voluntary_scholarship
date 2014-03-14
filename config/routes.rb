@@ -22,11 +22,26 @@ Rails.application.routes.draw do
       end
     end
     
-    resources :iterations, only: [:create, :show, :edit, :update, :destroy]
+    resources :iterations, only: [:create, :show, :edit, :update, :destroy] do
+      resources :participants, controller: 'iteration_participations', only: [:index, :new]
+    end
+    
+    resources :iteration_participations, only: [:create, :edit, :update, :destroy] do
+      collection do
+        get :with_state
+      end
+      
+      member do
+        put :accept
+        put :deny
+        put :change_roles
+      end
+    end
     
     get 'workflow' => 'workflow#index', as: :workflow
     
     namespace 'workflow' do
+      resources :organization_owner, only: :index
       resources :team_leader, only: :index
     end
   end

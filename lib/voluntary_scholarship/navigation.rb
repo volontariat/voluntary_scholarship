@@ -41,7 +41,7 @@ module VoluntaryScholarship
                 
                   unless (@iteration.new_record? rescue true)
                     iterations.item(
-                      :show, @iteration.name.present? ? @iteration.name : "#{@program.name} #{@iteration.from.strftime('%d.%m.%Y')} - #{@iteration.to.strftime('%d.%m.%Y')}", 
+                      :show, @iteration.to_s, 
                       scholarship_iteration_path(@iteration) 
                     ) do |iteration|
                       if can? :destroy, @iteration
@@ -50,6 +50,19 @@ module VoluntaryScholarship
                       
                       iteration.item :show, I18n.t('general.details'), "#{scholarship_iteration_path(@iteration)}#top"
                       iteration.item :edit, I18n.t('general.edit'), edit_scholarship_iteration_path(@iteration) if can? :edit, @iteration
+                      iteration.item :participants, I18n.t('scholarship_iteration_participations.index.title'), scholarship_iteration_participants_path(@iteration) do |team_members|
+                        team_members.item(
+                          :new, I18n.t('scholarship_iteration_participations.new.title'), new_scholarship_iteration_participant_path(@iteration), 
+                          highlights_on: -> { params[:controller] == 'scholarship/iteration_participations' && ['new', 'create'].include?(params[:action]) }
+                        )
+                        
+                        unless (@iteration_participation.new_record? rescue true)
+                          team_members.item(
+                            :edit, I18n.t('scholarship_iteration_participations.edit.title'), edit_scholarship_iteration_participation_path(@iteration_participation),
+                            highlights_on: -> { params[:controller] == 'scholarship/iteration_participations' && ['edit', 'update'].include?(params[:action]) }
+                          )
+                        end
+                      end
                     end
                   end
                 end
@@ -87,6 +100,7 @@ module VoluntaryScholarship
           
           if user_signed_in?
             primary.item :workflow, I18n.t('workflow.index.title'), scholarship_workflow_path do |workflow|
+              workflow.item :organization_owner, I18n.t('products.scholarship.workflow.organization_owner.index.title'), scholarship_workflow_organization_owner_index_path
               workflow.item :team_leader, I18n.t('products.scholarship.workflow.team_leader.index.title'), scholarship_workflow_team_leader_index_path
             end
           end

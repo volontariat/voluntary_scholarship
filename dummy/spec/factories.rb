@@ -39,4 +39,22 @@ FactoryGirl.define do
     from Date.new(2014, 6, 1)
     to Date.new(2014, 9, 1)
   end
+  
+  factory :scholarship_iteration_participation, class: Scholarship::IterationParticipation do
+    association :iteration, factory: :scholarship_iteration
+    association :user
+    association :team, factory: :scholarship_team
+    roles [:student]
+    
+    after_build do |iteration_participation|
+      team_roles = iteration_participation.roles.select{|role| Scholarship::TeamMembership::ROLES.include?(role) }
+      
+      if team_roles.any? && iteration_participation.team.present?
+        team_membership = FactoryGirl.create(
+          :scholarship_team_membership, team: iteration_participation.team, user: iteration_participation.user, roles: team_roles
+        )
+        team_membership.accept!
+      end
+    end
+  end
 end

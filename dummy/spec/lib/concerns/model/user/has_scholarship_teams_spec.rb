@@ -12,6 +12,18 @@ describe VoluntaryScholarship::Concerns::Model::User::HasScholarshipTeams do
     end 
   end
   
+  describe '#scholarship_iterations_as_organization_owner' do
+    it 'returns only the iterations where the user is an organization owner' do
+      user = FactoryGirl.create(:user)
+      organization = FactoryGirl.create(:organization, user: user)
+      program = FactoryGirl.create(:scholarship_program, organization: organization)
+      FactoryGirl.create(:scholarship_iteration)
+      iteration = FactoryGirl.create(:scholarship_iteration, program: program)
+      
+      user.scholarship_iterations_as_organization_owner.all.should == [iteration]
+    end
+  end
+  
   describe '#is_leader_of_scholarship_team?' do
     context 'is a leader' do
       it 'returns true' do
