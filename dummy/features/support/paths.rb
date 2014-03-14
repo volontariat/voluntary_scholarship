@@ -68,6 +68,11 @@ module NavigationHelpers
       
     when /the edit scholarship iteration page/
       edit_scholarship_iteration_path(@iteration)    
+      
+    # workflow
+    
+    when /the scholarship workflow page for team leader/
+      scholarship_workflow_team_leader_index_path  
        
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

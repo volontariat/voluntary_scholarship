@@ -3,6 +3,8 @@ class Scholarship::TeamMembershipsController < ApplicationController
   include Applicat::Mvc::Controller::Resource
   include VoluntaryScholarship::TeamMembershipsHelper
   
+  transition_actions Scholarship::TeamMembership::EVENTS
+  
   before_filter :find_team_membership, only: [:new]
   
   load_and_authorize_resource
@@ -11,9 +13,7 @@ class Scholarship::TeamMembershipsController < ApplicationController
   
   def index
     @team = Scholarship::Team.friendly.find(params[:team_id])
-    @team_memberships = @team.memberships.accepted.joins(:user).
-                   select('scholarship_team_memberships.*, CONCAT(users.first_name, " ", users.last_name) AS user_full_name').
-                   paginate(page: params[:page], per_page: 25).order('user_full_name ASC') 
+    @team_memberships = @team.memberships.accepted.order_by_user_full_name.paginate(page: params[:page], per_page: 25)
   end
   
   def new
@@ -53,6 +53,12 @@ class Scholarship::TeamMembershipsController < ApplicationController
   
   def resource
     @team_membership
+  end
+  
+  def with_state
+    @team_memberships = Scholarship::TeamMembership.of_team_leader(current_user).send(params[:state]).
+    order_by_user_full_name.includes(:team).paginate(page: params[:page], per_page: 25) 
+    render layout: false
   end
   
   private

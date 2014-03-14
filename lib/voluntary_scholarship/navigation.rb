@@ -25,7 +25,7 @@ module VoluntaryScholarship
           
           instance_exec primary, VoluntaryScholarship::Navigation.voluntary_menu_options[:organizations], &::Voluntary::Navigation.menu_code(:organizations)
           
-          primary.item :programs, I18n.t('scholarship_programs.index.short_title'), scholarship_programs_path do |programs|
+          primary.item :scholarship_programs, I18n.t('scholarship_programs.index.short_title'), scholarship_programs_path do |programs|
             programs.item :new, I18n.t('general.new'), new_scholarship_program_path
             
             unless (@program.new_record? rescue true)
@@ -57,7 +57,7 @@ module VoluntaryScholarship
             end
           end
           
-          primary.item :teams, I18n.t('scholarship_teams.index.short_title'), scholarship_teams_path do |teams|
+          primary.item :scholarship_teams, I18n.t('scholarship_teams.index.short_title'), scholarship_teams_path do |teams|
             teams.item :new, I18n.t('general.new'), new_scholarship_team_path
             
             unless (@team.new_record? rescue true)
@@ -82,6 +82,12 @@ module VoluntaryScholarship
                   end
                 end
               end
+            end
+          end
+          
+          if user_signed_in?
+            primary.item :workflow, I18n.t('workflow.index.title'), scholarship_workflow_path do |workflow|
+              workflow.item :team_leader, I18n.t('products.scholarship.workflow.team_leader.index.title'), scholarship_workflow_team_leader_index_path
             end
           end
           

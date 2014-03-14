@@ -1,37 +1,3 @@
 <h3><%= t("scholarship_team_memberships.index.title") %></h3>
-<% if @team_memberships.none? || @team_memberships.select{|e| e.id.present? }.none? %>
-<p><%= I18n.t("scholarship_team_memberships.index.empty_collection")%></p>
-<% else %>
-<table class="table table-striped">
-  <thead>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <th><%= t('activerecord.models.user') %></th>
-      <th><%= t('attributes.roles') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @team_memberships.select{|e| e.id.present? }.each do |team_membership| %>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <td>
-        <%= link_to team_membership.user.full_name, user_path(team_membership.user) %>
-      </td>
-      <td>
-      	<%= team_membership.roles.map(&:to_s).map(&:humanize).join(', ') %>
-      </td>
-      <td>
-      	<%= render partial: 'actions', locals: { team_membership: team_membership } %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% end %>
 
-<%= will_paginate @team_memberships %>
-
-<% if current_user.is_member_of_scholarship_team?(@team) %>
-  <%= destroy_scholarship_team_membership_link(current_user.membership_of_scholarship_team(@team)) %>
-<% elsif can?(:create, Scholarship::TeamMembership) %>
-  <%= link_to t("scholarship_team_memberships.new.title"), new_scholarship_team_member_path(@team) %>
-<% end %>
+<%= render 'collection' %>

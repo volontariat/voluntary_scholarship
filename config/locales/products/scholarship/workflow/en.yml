@@ -1,0 +1,11 @@
+en:
+
+  products:
+    scholarship:
+      workflow:
+        team_leader:
+          index:
+            title: Team Leader
+        user:
+          index:
+            title: User

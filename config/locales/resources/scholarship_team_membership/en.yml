@@ -11,6 +11,19 @@ en:
       title: Edit Team Membership
     destroy:
       title: Leave Team
+    
+    show:
+      events:
+        accept: Accept
+        deny: Deny
+        change_roles: Change roles
+          
+    workflow:
+      title: Team Memberships
+      requested: Requested
+      accepted: Accepted
+      changed_roles: Changed roles
+      denied:       
           
   activerecord:
     models:
