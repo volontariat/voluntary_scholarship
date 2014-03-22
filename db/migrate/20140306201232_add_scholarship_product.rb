@@ -1,5 +1,12 @@
 class AddScholarshipProduct < ActiveRecord::Migration
-  def change
-    Product.create(name: 'Scholarship', text: 'Dummy')
+  def up
+    if product = Product.where(name: 'Scholarship').first
+    else
+      Product.create(name: 'Scholarship', text: 'Dummy') 
+    end
+  end
+  
+  def down
+    product.destroy if product = Product.where(name: 'Scholarship').first
   end
 end
