@@ -17,7 +17,7 @@ module Scholarship
     validates :user_id, presence: true, uniqueness: { scope: :iteration_id }
     validate :accepted_team_membership_for_team_roles
     
-    attr_accessible :iteration_id, :team_id, :roles
+    attr_accessible :iteration_id, :text, :team_id, :roles
     
     bitmask :roles, as: ROLES
     

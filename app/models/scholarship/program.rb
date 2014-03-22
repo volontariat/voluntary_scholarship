@@ -11,7 +11,7 @@ module Scholarship
     validates :organization_id, presence: true
     validates :name, presence: true, uniqueness: { scope: [:organization_id] }
     
-    attr_accessible :name, :organization_id
+    attr_accessible :name, :text, :organization_id
     
     PARENT_TYPES = ['organization']
   end
