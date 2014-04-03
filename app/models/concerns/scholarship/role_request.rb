@@ -7,7 +7,7 @@ module Scholarship
       
       scope :order_by_user_full_name, -> do 
         joins(:user).
-        select(table_name + '.*, CONCAT(users.first_name, " ", users.last_name) AS user_full_name').
+        select(table_name + ".*, CONCAT(users.first_name, ' ', users.last_name) AS user_full_name").
         order('user_full_name ASC')
       end
       
