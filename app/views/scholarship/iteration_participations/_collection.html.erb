@@ -43,7 +43,7 @@
 <%= will_paginate @iteration_participations %>
 
 <% if @iteration.present? %>
-	<% if current_user.is_participant_of_scholarship_iteration?(@iteration) %>
+	<% if current_user && current_user.is_participant_of_scholarship_iteration?(@iteration) %>
 	  <%= destroy_scholarship_iteration_participation_link(current_user.participation_of_scholarship_iteration(@iteration)) %>
 	<% elsif can?(:create, Scholarship::IterationParticipation) %>
 	  <%= link_to t("scholarship_iteration_participations.new.title"), new_scholarship_iteration_participant_path(@iteration) %>
