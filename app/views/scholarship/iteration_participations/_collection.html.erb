@@ -42,7 +42,7 @@
 
 <%= will_paginate @iteration_participations %>
 
-<% if @iteration.present? %>
+<% if @iteration.present? && user_signed_in? %>
 	<% if current_user && current_user.is_participant_of_scholarship_iteration?(@iteration) %>
 	  <%= destroy_scholarship_iteration_participation_link(current_user.participation_of_scholarship_iteration(@iteration)) %>
 	<% elsif can?(:create, Scholarship::IterationParticipation) %>

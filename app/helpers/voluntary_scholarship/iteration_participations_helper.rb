@@ -1,6 +1,8 @@
 module VoluntaryScholarship
   module IterationParticipationsHelper
     def can_update_scholarship_iteration_participation_roles?(iteration_participation)
+      return false unless user_signed_in?
+      
       iteration_participation.new_record? || 
       current_user.is_master? || 
       current_user.id == iteration_participation.iteration.program.organization.user_id ||

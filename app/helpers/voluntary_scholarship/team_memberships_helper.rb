@@ -1,6 +1,8 @@
 module VoluntaryScholarship
   module TeamMembershipsHelper
     def can_update_scholarship_team_membership_roles?(team_membership)
+      return false unless user_signed_in?
+      
       team_membership.new_record? || 
       current_user.is_master? || 
       current_user.is_leader_of_scholarship_team?(team_membership.team) ||

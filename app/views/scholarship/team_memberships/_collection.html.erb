@@ -38,7 +38,7 @@
 
 <%= will_paginate @team_memberships %>
 
-<% if @team.present? %>
+<% if @team.present? && user_signed_in? %>
 	<% if current_user.is_member_of_scholarship_team?(@team) %>
 	  <%= destroy_scholarship_team_membership_link(current_user.membership_of_scholarship_team(@team)) %>
 	<% elsif can?(:create, Scholarship::TeamMembership) %>
