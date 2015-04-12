@@ -7,6 +7,7 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 
 Bundler.require(*Rails.groups)
+
 require "voluntary_scholarship"
 
 module Dummy
@@ -26,6 +27,9 @@ module Dummy
     config.generators do |g|
       g.orm :active_record
     end
+    
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
 

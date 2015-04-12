@@ -9,10 +9,11 @@
     <li><%= link_to t('general.edit'), eval("edit_scholarship_iteration_participation_path(iteration_participation)") %></li>
   <% end %>
   
-  <% if iteration_participation.state_events.select{|event| can? event, iteration_participation }.any? %>
+  <% links = event_links_for_resource(iteration_participation, 'scholarship_iteration_participations') %>
+  <% if links.any? %>
   <li class="divider"></li>
+  <%= render 'shared/resource/event_elements', links: links %>
   <% end %>
-  <%= render 'shared/resource/event_elements', resource: iteration_participation, type: 'scholarship_iteration_participations' %>
   </ul>
 </div>
 <% end %>

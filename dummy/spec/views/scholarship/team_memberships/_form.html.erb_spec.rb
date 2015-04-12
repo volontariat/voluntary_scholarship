@@ -9,7 +9,7 @@ describe 'scholarship/team_memberships/_form.html.erb' do
   describe 'roles field' do
     context 'user can update scholarship team membership roles' do
       it 'shows the field' do
-        view.stub!(:can_update_scholarship_team_membership_roles?).with(@team_membership).and_return(true)
+        view.stub(:can_update_scholarship_team_membership_roles?).with(@team_membership).and_return(true)
         
         render
         
@@ -19,7 +19,7 @@ describe 'scholarship/team_memberships/_form.html.erb' do
     
     context 'user cannot update scholarship team membership roles' do
       it 'shows a list of roles instead of the field' do
-        view.stub!(:can_update_scholarship_team_membership_roles?).with(@team_membership).and_return(false)
+        view.stub(:can_update_scholarship_team_membership_roles?).with(@team_membership).and_return(false)
         
         render
         

@@ -19,10 +19,7 @@ Feature: Manage transitions of scholarship iteration participations
     Then I should see "Update successful"
     
   Scenario: Deny scholarship iteration participation request
-    Given an organization named "organization 1" assigned to me
-    And a scholarship program named "scholarship program 1" assigned to my organization
-    And a scholarship iteration named "scholarship iteration 1" assigned to my scholarship program
-    And a requested scholarship iteration participation for my iteration
+    Given a requested scholarship iteration participation for my iteration
     When I go to the scholarship workflow page for organization owner
     And follow "Actions"
     And follow "Deny"

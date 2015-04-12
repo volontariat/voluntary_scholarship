@@ -9,7 +9,7 @@ describe Scholarship::Iteration do
           
           iteration.valid?
           
-          iteration.errors[:to].empty?.should be_true
+          iteration.errors[:to].empty?.should be_truthy
         end
       end
       

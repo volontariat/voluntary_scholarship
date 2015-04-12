@@ -9,7 +9,7 @@ describe Scholarship::IterationParticipation do
           
           iteration_participation.valid?
           
-          iteration_participation.errors[:team_id].empty?.should be_true
+          iteration_participation.errors[:team_id].empty?.should be_truthy
         end
       end
       
@@ -78,7 +78,7 @@ describe Scholarship::IterationParticipation do
                 it 'sets no error' do
                   @iteration_participation.valid?
           
-                  @iteration_participation.errors[:team_id].empty?.should be_true
+                  @iteration_participation.errors[:team_id].empty?.should be_truthy
                 end
               end
             end
@@ -100,7 +100,7 @@ describe Scholarship::IterationParticipation do
           
           iteration_participation = FactoryGirl.create(:scholarship_iteration_participation, iteration: iteration, user: user)
           
-          iteration_participation.accepted?.should be_true
+          iteration_participation.accepted?.should be_truthy
         end
       end
       
@@ -108,7 +108,7 @@ describe Scholarship::IterationParticipation do
         it 'does not accept the participation' do
           iteration_participation = FactoryGirl.create(:scholarship_iteration_participation)
           
-          iteration_participation.requested?.should be_true
+          iteration_participation.requested?.should be_truthy
         end
       end
     end

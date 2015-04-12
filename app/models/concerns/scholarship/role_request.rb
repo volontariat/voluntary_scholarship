@@ -18,6 +18,8 @@ module Scholarship
       
       validates :roles, presence: true
       
+      after_initialize :set_initial_state
+      
       state_machine :state, initial: :requested do
         event :accept do
           transition [:requested, :denied, :changed_roles] => :accepted
@@ -30,6 +32,12 @@ module Scholarship
         event :change_roles do
           transition :accepted => :changed_roles
         end
+      end
+      
+      private
+      
+      def set_initial_state
+        self.state ||= :requested
       end
     end
   end

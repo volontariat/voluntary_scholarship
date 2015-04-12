@@ -13,7 +13,7 @@ describe Scholarship::Team do
           
           team_membership = Scholarship::TeamMembership.where(team_id: team.id, user_id: user.id).first
           team_membership.roles.should == [:team_leader]
-          team_membership.accepted?.should be_true
+          team_membership.accepted?.should be_truthy
         end
       end
       
@@ -22,7 +22,7 @@ describe Scholarship::Team do
           team = Scholarship::Team.new(kind: 'sponsored', name: 'Dummy')
           team.save
           
-          team.valid?.should be_false
+          team.valid?.should be_falsey
           team.errors.full_messages.should include('Memberships is invalid')
           Scholarship::Team.count.should == 0
           Scholarship::TeamMembership.count.should == 0
