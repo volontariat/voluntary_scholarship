@@ -7,7 +7,7 @@ module Scholarship
     include Applicat::Mvc::Model::Resource::Base
     
     has_many :memberships, class_name: 'Scholarship::TeamMembership'
-    has_many :members, class_name: 'User', through: :memberships
+    has_many :members, class_name: 'User', through: :memberships, source: 'user'
     
     validates :name, presence: true, uniqueness: true
     validates :kind, presence: true, inclusion: { in: KINDS }
