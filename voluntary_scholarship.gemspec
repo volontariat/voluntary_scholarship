@@ -11,12 +11,12 @@ Gem::Specification.new do |s|
   s.email       = ["gawlista@gmail.com"]
   s.homepage    = "http://github.com/volontariat/voluntary_scholarship"
   s.summary     = "Scholarship plugin for crowdsourcing management system Voluntary.Software."
-  s.description = "Plugin for #Crowdsourcing system Voluntary.Software: http://bit.ly/vs-0-1-0"
+  s.description = "Plugin for #Crowdsourcing management system gem voluntary: http://bit.ly/vs-0-1-0"
   s.license     = 'MIT'
   
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency 'voluntary', '~> 0.3.0'
+  s.add_dependency 'voluntary', '~> 0.4.0'
 
   s.add_dependency 'bitmask_attributes', '~> 1.0.0'
 
