@@ -1,23 +1,23 @@
-<%= simple_form_for(@iteration_participation, html: {class: 'form-horizontal'}) do |f| %>
+<%= simple_form_for(@iteration_participation, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f| %>
   <%= f.input :iteration_id, as: :hidden %>
   <%= render partial: 'shared/form/error_messages', locals: { resource: @iteration_participation } %>
   
-  <div class="form-inputs">
-  	<%= f.input :team_id, collection: current_user.scholarship_teams %>
-  	<% if can_update_scholarship_iteration_participation_roles?(@iteration_participation) %>
-  	  <%= f.input :roles, as: :check_boxes, collection: Scholarship::IterationParticipation::ROLES.map { |r| [r.capitalize, r] }, include_hidden: false, label: t('attributes.roles') %>
-    <% else %>
-      <div class="control-group string required">
-      	<label class="string required control-label">
-      		<abbr title="required">*</abbr> Roles
-        </label>
-        <div class="controls"><%= @iteration_participation.roles.map(&:to_s).map(&:humanize).join(', ') %></div>
-      </div>  
-    <% end %>
-    <%= f.input :text, label: t('attributes.text'), input_html: {style: 'width: 500px; height:300px;'} %>
-  </div>
+	<%= f.input :team_id, collection: current_user.scholarship_teams %>
+	<% if can_update_scholarship_iteration_participation_roles?(@iteration_participation) %>
+	  <%= f.input :roles, as: :check_boxes, collection: Scholarship::IterationParticipation::ROLES.map { |r| [r.capitalize, r] }, include_hidden: false, label: t('attributes.roles') %>
+  <% else %>
+    <div class="control-group string required">
+    	<label class="string required control-label">
+    		<abbr title="required">*</abbr> Roles
+      </label>
+      <div class="controls"><%= @iteration_participation.roles.map(&:to_s).map(&:humanize).join(', ') %></div>
+    </div>  
+  <% end %>
+  <%= f.input :text, label: t('attributes.text'), input_html: {style: 'width: 500px; height:300px;'} %>
   
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.button :submit %>
+    </div>
   </div>
 <% end %>
