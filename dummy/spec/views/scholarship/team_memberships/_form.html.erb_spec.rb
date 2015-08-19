@@ -24,7 +24,7 @@ describe 'scholarship/team_memberships/_form.html.erb' do
         render
         
         rendered.match(/scholarship_team_membership\[roles\]\[\]/).should be_nil
-        rendered.match('<div class="controls">Student</div>').should_not be_nil
+        rendered.match('Student').should_not be_nil
       end
     end
   end

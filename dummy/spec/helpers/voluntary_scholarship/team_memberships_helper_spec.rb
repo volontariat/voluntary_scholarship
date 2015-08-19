@@ -8,7 +8,7 @@ describe VoluntaryScholarship::TeamMembershipsHelper do
   describe '#can_update_scholarship_team_membership_roles?' do
     context 'user is master' do
       it 'returns true' do
-        allow(self).to receive(:current_user).and_return FactoryGirl.create(:master_user)
+        allow(self).to receive(:current_user).and_return FactoryGirl.create(:user, roles: [:master])
         
         can_update_scholarship_team_membership_roles?(FactoryGirl.build(:scholarship_team_membership)).should be_truthy
       end
